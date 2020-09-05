@@ -1,0 +1,72 @@
+# Global Postfix configuration file.
+
+# COMPATIBILITY
+compatibility_level = 2
+
+# SOFT BOUNCE
+#soft_bounce = no
+
+# LOCAL PATHNAME INFORMATION
+queue_directory = /var/spool/postfix
+command_directory = /usr/sbin
+daemon_directory = /usr/libexec/postfix
+data_directory = /var/lib/postfix
+
+# QUEUE AND PROCESS OWNERSHIP
+mail_owner = postfix
+
+# INTERNET HOST AND DOMAIN NAMES
+myhostname = walk8243.xyz
+mydomain = $myhostname
+
+# SENDING MAIL
+myorigin = $mydomain
+
+# RECEIVING MAIL
+inet_interfaces = all
+
+# Enable IPv4, and IPv6 if supported
+inet_protocols = all
+mydestination = $myhostname, localhost
+
+# REJECTING MAIL FOR UNKNOWN LOCAL USERS
+unknown_local_recipient_reject_code = 550
+
+# TRUST AND RELAY CONTROL
+mynetworks = 127.0.0.0/8
+
+# ALIAS DATABASE
+alias_maps = hash:/etc/aliases
+alias_database = hash:/etc/aliases
+
+# DELIVERY TO MAILBOX
+home_mailbox = Maildir/
+
+# DEBUGGING CONTROL
+debug_peer_level = 2
+debugger_command =
+	 PATH=/bin:/usr/bin:/usr/local/bin:/usr/X11R6/bin
+	 ddd $daemon_directory/$process_name $process_id & sleep 5
+
+# INSTALL-TIME CONFIGURATION INFORMATION
+sendmail_path = /usr/sbin/sendmail.postfix
+newaliases_path = /usr/bin/newaliases.postfix
+mailq_path = /usr/bin/mailq.postfix
+setgid_group = postdrop
+html_directory = no
+sample_directory = /usr/share/doc/postfix/samples
+readme_directory = /usr/share/doc/postfix/README_FILES
+
+# TLS CONFIGURATION
+smtpd_tls_cert_file = /etc/pki/tls/certs/postfix.pem
+smtpd_tls_key_file = /etc/pki/tls/private/postfix.key
+smtpd_tls_security_level = may
+smtp_tls_CApath = /etc/pki/tls/certs
+smtp_tls_CAfile = /etc/pki/tls/certs/ca-bundle.crt
+smtp_tls_security_level = may
+
+# OTHER CONFIGURATION
+meta_directory = /etc/postfix
+shlib_directory = /usr/lib64/postfix
+message_size_limit = 10485760
+mailbox_size_limit = 52428800
