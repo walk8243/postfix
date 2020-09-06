@@ -16,7 +16,7 @@ data_directory = /var/lib/postfix
 mail_owner = postfix
 
 # INTERNET HOST AND DOMAIN NAMES
-myhostname = walk8243.xyz
+myhostname = walk8243.work
 mydomain = $myhostname
 
 # SENDING MAIL
@@ -56,6 +56,9 @@ setgid_group = postdrop
 html_directory = no
 sample_directory = /usr/share/doc/postfix/samples
 readme_directory = /usr/share/doc/postfix/README_FILES
+
+# SMTP CONFIGURATION
+smtp_host_lookup = dns, native
 
 # TLS CONFIGURATION
 smtpd_tls_cert_file = /etc/pki/tls/certs/postfix.pem
